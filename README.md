@@ -1,6 +1,6 @@
 #  Real-Time Kafka WebSocket Dashboard
 
-![Watch the Demo Video](assets/demo/Screen-Recording.mp4)
+![Watch the Demo Video](assets/demo/Screen-Recording.gif)
 
 A real-time data pipeline built using **FastAPI**, **WebSocket**, **Apache Kafka**, and **vanilla JavaScript**, with a live-updating browser UI. Messages sent from the frontend are streamed to Kafka via WebSocket, consumed in real-time, and displayed instantly in the UI.
 
