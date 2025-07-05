@@ -6,26 +6,26 @@ A real-time data pipeline built using **FastAPI**, **WebSocket**, **Apache Kafka
 
 ---
 
-## ✨ Features
+## Features
 
-- 🔌 **Send messages** via WebSocket from a browser
-- 📡 **Produce Kafka events** from FastAPI backend
-- 🧠 **Consume Kafka messages** inside FastAPI in real time
-- 🖥️ **Live dashboard UI** using Server-Sent Events (SSE)
-- 💡 Highlights messages from WebSocket vs Kafka
-- 🧪 Built with simplicity, great for learning real-time data pipelines
+- **Send messages** via WebSocket from a browser
+- **Produce Kafka events** from FastAPI backend
+- **Consume Kafka messages** inside FastAPI in real time
+- **Live dashboard UI** using Server-Sent Events (SSE)
+- Highlights messages from WebSocket vs Kafka
+- Built with simplicity, great for learning real-time data pipelines
 
 ---
 
-## 📷 Demo Preview
+##  Demo Preview
 
 <img src="preview.gif" width="700" alt="Live demo gif showing UI sending and receiving messages from Kafka">
 
-> 🔔 Message sent ➝ WebSocket ➝ Kafka ➝ FastAPI ➝ SSE ➝ Frontend
+>  Message sent ➝ WebSocket ➝ Kafka ➝ FastAPI ➝ SSE ➝ Frontend
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Layer       | Tech Used                         |
 |-------------|-----------------------------------|
@@ -36,10 +36,9 @@ A real-time data pipeline built using **FastAPI**, **WebSocket**, **Apache Kafka
 
 ---
 
-## 🚀 How to Run Locally
+##  How to Run Locally
 
-### 1️⃣ Clone the Repo
+###  Clone the Repo
 
 ```bash
-git clone https://github.com/your-username/realtime-kafka-websocket-dashboard.git
-cd realtime-kafka-websocket-dashboard
+git clone https://github.com/bhawna94110/kafka-websocket-app.git
