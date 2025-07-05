@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Real-time Kafka Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f2f4f7;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2c3e50;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .input-section {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 12px 16px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      outline: none;
+      background: #f9fafc;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      background-color: #3f51b5;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #303f9f;
+    }
+
+    #output {
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+      height: 300px;
+      overflow-y: auto;
+      background: #f9f9f9;
+      border-radius: 12px;
+    }
+
+    .msg {
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      max-width: 80%;
+      display: inline-block;
+      word-wrap: break-word;
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    .websocket {
+      background-color: #d0e6ff;
+      color: #0d47a1;
+    }
+
+    .kafka {
+      background-color: #e1f5e6;
+      color: #1b5e20;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Real-Time Kafka WebSocket Dashboard</h2>
+
+    <div class="input-section">
+      <input id="msgInput" type="text" placeholder="Type something..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <div id="output"></div>
+  </div>
+
+  <script>
+    const socket = new WebSocket("ws://localhost:8000/ws");
+
+    socket.onopen = () => console.log("✅ WebSocket connected");
+    socket.onerror = () => console.log("❌ WebSocket connection error");
+
+    function sendMessage() {
+      const input = document.getElementById("msgInput");
+      const msg = input.value.trim();
+      if (msg !== "") {
+        socket.send(msg);
+        input.value = "";
+      }
+    }
+
+    const eventSource = new EventSource("http://localhost:8000/events");
+
+    eventSource.onmessage = function(event) {
+      const output = document.getElementById("output");
+      const div = document.createElement("div");
+      div.classList.add("msg");
+
+      if (event.data.startsWith("[WebSocket]")) {
+        div.classList.add("websocket");
+      } else if (event.data.startsWith("[Kafka]")) {
+        div.classList.add("kafka");
+      }
+
+      div.textContent = event.data;
+      output.appendChild(div);
+      output.scrollTop = output.scrollHeight;
+    };
+  </script>
+</body>
+</html>
